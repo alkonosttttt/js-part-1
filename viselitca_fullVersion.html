@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>full version viselitca</title>
+</head>
+<body>
+<script>
+    let words = ["кот"];
+    var word = words[Math.floor(Math.random() * words.length)];
+    var answerArray = [];
+    for (var i = 0; i < word.length; i++) {
+        answerArray[i] = "_";
+    }
+    let remainingLetters = word.length;
+    let tryCount = 3;
+
+    console.log(answerArray);
+    console.log(word);
+
+
+    while ((remainingLetters > 0) && (tryCount > 0)) {
+        alert(answerArray.join(" "));
+        let guess = prompt("введите строчную букву иди нажмите отмена для выхода").toLowerCase();
+
+        if (guess === null) {
+            break;
+        } else if (guess.length !== 1) {
+            alert("введите одиночную букву");
+        } else {
+            let isHit = false; //обновление состояния игры
+            for (let j = 0; j < word.length; ++j) {
+                console.log(answerArray[j])
+                if (answerArray[j] === guess) {
+                    alert("Эта буква уже угадана");
+                    break;
+                }
+                if (word[j] === guess) {
+                    answerArray[j] = guess;
+                    remainingLetters--;
+                    isHit = true;
+                }
+            }
+            if (!isHit) {
+                tryCount--;
+                alert("у вас осталось" + tryCount);
+                console.log(tryCount);
+                if (tryCount === 0) {
+                    alert("у вас кончились 3 попытки");
+                    break;
+                }
+            }
+        }
+
+    }
+    alert("Загаданное слово " + word);
+
+</script>
+</body>
+</html>
